@@ -3,42 +3,8 @@
     <div class="logo mx-auto mb-4">
       <img :src="require('./../assets/Logo.png')" width="50px" />
     </div>
-    <p class="menu-text mx-auto mb-4">建立你的帳號</p>
+    <p class="menu-text mx-auto mb-4">建立帳號</p>
     <form class="mx-auto w-100" @submit.prevent.stop="handleSubmit">
-      <!-- 優化：字數空白提示 -->
-      <div
-        class="form-input d-flex flex-column account"
-        :class="{ 'form-input-error': isNull && !account }"
-      >
-        <label for="account" class="form-input-text">帳號</label>
-        <input
-          type="text"
-          name="account"
-          id="account"
-          v-model.trim="account"
-          required
-        />
-        <span class="text-danger" v-if="isNull && !account">不可空白</span>
-        <span class="text-danger" v-if="account.length > 20"
-          >字數超出上限！
-        </span>
-      </div>
-      <div
-        class="form-input d-flex flex-column"
-        :class="{ 'form-input-error': isNull && !name }"
-      >
-        <label for="name" class="form-input-text">名稱</label>
-        <input type="text" name="text" id="name" v-model.trim="name" required />
-        <div class="d-flex justify-content-between">
-          <div class="me-auto">
-            <span class="text-danger" v-if="isNull && !name">不可空白 </span>
-            <span class="text-danger" v-if="name.length > 50"
-              >字數超出上限！
-            </span>
-          </div>
-          <span class="length-input">{{ name.length }} / 50</span>
-        </div>
-      </div>
       <div
         class="form-input d-flex flex-column"
         :class="{
@@ -55,6 +21,24 @@
         />
         <span class="text-danger" v-if="isNull && !email">不可空白</span>
       </div>
+
+      <div
+        class="form-input d-flex flex-column"
+        :class="{ 'form-input-error': isNull && !name }"
+      >
+        <label for="name" class="form-input-text">名稱</label>
+        <input type="text" name="text" id="name" v-model.trim="name" required />
+        <div class="d-flex justify-content-between">
+          <div class="me-auto">
+            <span class="text-danger" v-if="isNull && !name">不可空白 </span>
+            <span class="text-danger" v-if="name.length > 50"
+              >字數超出上限！
+            </span>
+          </div>
+          <span class="length-input">{{ name.length }} / 50</span>
+        </div>
+      </div>
+
       <div
         class="form-input d-flex flex-column"
         :class="{ 'form-input-error': isNull && !password }"
@@ -127,9 +111,8 @@ export default {
   name: "SignUp",
   data() {
     return {
-      account: "",
-      name: "",
       email: "",
+      name: "",
       password: "",
       pwdChecked: "",
       isNull: false,
@@ -148,13 +131,7 @@ export default {
     },
     async handleSubmit() {
       try {
-        if (
-          !this.name ||
-          !this.account ||
-          !this.email ||
-          !this.password ||
-          !this.pwdChecked
-        ) {
+        if (!this.name || !this.email || !this.password || !this.pwdChecked) {
           this.isNull = true
           return
         }
@@ -168,9 +145,8 @@ export default {
         }
 
         const { data } = await authorizationAPI.signup({
-          account: this.account,
-          name: this.name,
           email: this.email,
+          name: this.name,
           password: this.password,
           checkPassword: this.pwdChecked,
         })
