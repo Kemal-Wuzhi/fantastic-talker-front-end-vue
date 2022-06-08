@@ -105,7 +105,7 @@ export default {
         this.isProcessing = true
 
         const response = await authorizationAPI.signin({
-          account: this.email,
+          email: this.email,
           password: this.password,
         })
 
