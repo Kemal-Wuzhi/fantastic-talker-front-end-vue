@@ -95,7 +95,7 @@ export default {
     },
     async handleSubmit() {
       try {
-        if (!this.email || !this.email) {
+        if (!this.email || !this.password) {
           this.alertMsg = "請填入信箱和密碼"
           this.alertStatus = "error"
           this.alertShow()
