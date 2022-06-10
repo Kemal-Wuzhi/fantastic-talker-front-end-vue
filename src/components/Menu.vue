@@ -8,7 +8,7 @@
         <ul>
           <li class="menu-icon mb-4">
             <!-- TODO:router-link -->
-            <router-link to="/main" class="menu-text">
+            <router-link to="/mainpage" class="menu-text">
               <img class="me-3" :src="mainUrl" />
               首頁
             </router-link>
@@ -108,7 +108,7 @@ export default {
     },
     logout() {
       this.$store.commit("revokeAuthentication")
-      this.$router.push("/login")
+      this.$router.push("/signin")
     },
   },
   mounted() {
@@ -117,7 +117,7 @@ export default {
       this.alertStatus = "error"
       this.alertShow()
       setTimeout(() => {
-        this.$router.push("/login")
+        this.$router.push("/signin")
       }, 5000)
     }
   },

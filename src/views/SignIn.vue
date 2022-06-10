@@ -121,7 +121,7 @@ export default {
 
         this.$store.commit("setCurrentUser", data.user)
 
-        this.$router.push("/main")
+        this.$router.push("/mainpage")
       } catch (error) {
         this.isProcessing = false
         this.password = ""
