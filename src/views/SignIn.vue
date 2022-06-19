@@ -119,7 +119,7 @@ export default {
 
         localStorage.setItem("token", data.token)
 
-        this.$store.commit("setCurrentUser", data.user)
+        // this.$store.commit("setCurrentUser", data.user)
 
         this.$router.push("/mainpage")
       } catch (error) {

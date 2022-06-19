@@ -16,7 +16,10 @@
           <li class="menu-icon mb-4">
             <!-- TODO:router-link 設params-->
             <router-link
-              :to="{ name: 'user-profile', params: { userId: currentUser.id } }"
+              :to="{
+                name: 'user-profile',
+                params: { userId: currentUser.id },
+              }"
               class="menu-text"
             >
               <img class="profile-icon" :src="userProfileUrl" />
@@ -24,7 +27,7 @@
             </router-link>
           </li>
           <li class="menu-icon mb-4">
-            <router-link :to="{ name: 'setting' }" class="menu-text">
+            <router-link to="setting" class="menu-text">
               <img class="me-3" :src="settingUrl" />
               設定
             </router-link>
@@ -37,7 +40,7 @@
         data-bs-toggle="modal"
         data-bs-target="#new-tweet-modal"
       >
-        推文
+        收藏老師
       </button>
     </div>
     <div>
@@ -53,7 +56,7 @@
         <a class="menu-text ms-2 signout">登出</a>
       </button>
     </div>
-    <NewTweetModal />
+
     <!-- alert -->
     <div
       class="alert d-flex fixed-top"
@@ -95,7 +98,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["currentUser", "isAuthenticated", "newTweets"]),
+    ...mapState(["currentUser", "isAuthenticated"]),
   },
   methods: {
     alertShow() {

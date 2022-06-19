@@ -8,21 +8,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentUser: {
+      // id: -1,
+      // account: "",
+      // name: "",
+      // email: "",
+      // avatar: "",
+      // cover: "",
+      // introduction: "",
+      // role: "",
+      // followingCount: 0,
+      // followerCount: 0,
+      // tweetCount: 0,
       id: -1,
-      account: "",
       name: "",
       email: "",
-      avatar: "",
-      cover: "",
-      introduction: "",
       role: "",
-      followingCount: 0,
-      followerCount: 0,
-      tweetCount: 0,
     },
     isAuthenticated: false,
     token: "",
-    newTweets: [],
+    // newTweets: [],
   },
   mutations: {
     setCurrentUser(state, currentUser) {
@@ -40,14 +44,15 @@ export default new Vuex.Store({
       state.token = ""
       localStorage.removeItem("token")
     },
-    setNewTweet(state, newTweet) {
-      state.newTweets.push(newTweet)
-    },
-    resetNewTweet(state) {
-      state.newTweets = []
-    },
+    // setNewTweet(state, newTweet) {
+    //   state.newTweets.push(newTweet)
+    // },
+    // resetNewTweet(state) {
+    //   state.newTweets = []
+    // },
   },
   actions: {
+    // 在 actions 屬性裡設定一個 fetchCurrentUser 方法
     async fetchCurrentUser({ commit }) {
       try {
         const { data } = await userAPI.getCurrentUser()
