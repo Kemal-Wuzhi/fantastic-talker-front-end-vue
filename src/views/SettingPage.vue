@@ -137,7 +137,7 @@
 
 <script>
 import { mapState } from "vuex"
-import Menu from "../components/Menu.vue"
+import Menu from "../components/MenuPage.vue"
 import userAPI from "../apis/user"
 
 export default {

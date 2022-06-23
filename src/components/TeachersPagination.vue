@@ -10,8 +10,8 @@
           class="page-link"
           aria-label="Previous"
           :to="{
-            name: 'restaurants',
-            query: { categoryId, page: previousPage },
+            name: 'teachers',
+            query: { page: previousPage },
           }"
         >
           <span aria-hidden="true">&laquo;</span>
@@ -26,8 +26,8 @@
         <router-link
           class="page-link"
           :to="{
-            name: 'restaurants',
-            query: { categoryId, page },
+            name: 'teachers',
+            query: { page },
           }"
         >
           {{ page }}
@@ -42,7 +42,7 @@
         <router-link
           class="page-link"
           aria-label="Next"
-          :to="{ name: 'restaurants', query: { categoryId, page: nextPage } }"
+          :to="{ name: 'teachers', query: { page: nextPage } }"
         >
           <span aria-hidden="true">&raquo;</span>
         </router-link>
@@ -54,10 +54,6 @@
 <script>
 export default {
   props: {
-    categoryId: {
-      type: [String, Number],
-      default: "",
-    },
     currentPage: {
       type: Number,
       default: 1,

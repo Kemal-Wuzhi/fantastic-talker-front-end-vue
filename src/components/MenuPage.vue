@@ -8,7 +8,7 @@
         <ul>
           <li class="menu-icon mb-4">
             <!-- TODO:router-link -->
-            <router-link to="/mainpage" class="menu-text">
+            <router-link to="/teachers" class="menu-text">
               <img class="me-3" :src="mainUrl" />
               首頁
             </router-link>
@@ -125,7 +125,7 @@ export default {
     }
   },
   created() {
-    if (this.$route.path === "/main") {
+    if (this.$route.path === "/mainpage") {
       this.mainUrl = this.mainActiveUrl
     }
     if (this.$route.path === "/user-profile") {

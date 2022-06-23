@@ -3,7 +3,7 @@ import VueRouter from "vue-router"
 // import { createRouter, createWebHistory } from "vue-router"
 import SignIn from "../views/SignIn.vue"
 import NotFound from "../views/NotFound.vue"
-// import store from "./../store"
+import store from "./../store"
 
 Vue.use(VueRouter)
 
@@ -27,6 +27,18 @@ const routes = [
     path: "/mainpage",
     name: "mainpage",
     component: () => import("../views/MainPage.vue"),
+    children: [
+      {
+        path: "/teachers",
+        name: "teacher-introduction",
+        component: () => import("../views/TeachersIntro.vue"),
+      },
+    ],
+  },
+  {
+    path: "/teachers/:id",
+    name: "teacher",
+    component: () => import("../views/TeacherIntro.vue"),
   },
   {
     path: "/setting",
@@ -41,6 +53,7 @@ const routes = [
     component: () => import("../views/UserProfile.vue"),
     children: [],
   },
+
   { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
 ]
 
@@ -50,13 +63,30 @@ const router = new VueRouter({
   routes,
 })
 
-// 這個造成我的網頁會在登入之後 5 內跳轉回登入頁面
-// from 使用者來自哪個路由 to 使用者要到哪個路由
-// router.beforeEach(async (to, from, next) => {
-// 呼叫 actions 使用 dispatch，表示分發
-// store.dispatch("fetchCurrentUser")
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem("token")
+  const tokenInStore = store.state.token
 
-//   next()
-// })
+  let isAuthenticated = store.state.isAuthenticated
+
+  if (token && token !== tokenInStore) {
+    isAuthenticated = await store.dispatch("fetchCurrentUser")
+  }
+
+  const pathsWithoutAuthentication = ["signin", "signup"]
+
+  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+    next("/signin")
+    return
+  }
+
+  // 如果 token 有效，且要去登入和註冊頁，則轉址到首頁
+  if (isAuthenticated && pathsWithoutAuthentication.includes(to.name)) {
+    next("/mainpage")
+    return
+  }
+
+  next()
+})
 
 export default router

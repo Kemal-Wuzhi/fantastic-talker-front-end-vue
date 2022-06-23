@@ -109,6 +109,7 @@ export default {
           password: this.password,
         })
 
+        console.log("responseSignIn:", response)
         const { data } = response
 
         if (data.status !== "success") {
@@ -118,8 +119,10 @@ export default {
         }
 
         localStorage.setItem("token", data.token)
-
-        // this.$store.commit("setCurrentUser", data.user)
+        //要提交 mutation 事件時，語法是：this.$store.commit(<方法名稱>)。
+        // 對應到我們在 mutation 定義的 setCurrentUser，
+        // 就是 this.$store.commit(setCurrentUser)。
+        this.$store.commit("setCurrentUser", data.user)
 
         this.$router.push("/mainpage")
       } catch (error) {

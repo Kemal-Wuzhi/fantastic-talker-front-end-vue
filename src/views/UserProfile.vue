@@ -100,7 +100,7 @@
 
 <script>
 import NavTabs from "../components/NavTabs.vue"
-import Menu from "../components/Menu.vue"
+import Menu from "../components/MenuPage.vue"
 // import UserProfileCard from "../components/UserProfileCard.vue"
 import userAPI from "../apis/user"
 import { mapState } from "vuex"

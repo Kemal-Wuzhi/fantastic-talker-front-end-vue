@@ -28,6 +28,8 @@ export default new Vuex.Store({
     token: "",
     // newTweets: [],
   },
+  // 現在，我們要從 Vue 物件把 user 的內容提交給 Vuex 的 mutation，
+  //然後由 mutation 來更新 state 裡的 currentUser 狀態。
   mutations: {
     setCurrentUser(state, currentUser) {
       state.currentUser = {

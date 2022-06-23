@@ -1,30 +1,44 @@
-<template>
+<!-- <template v-else>
   <div class="container-fluid vh-100">
     <div class="row h-100">
-      <div class="col-3 menu mh-100">
-        <Menu />
-      </div>
-      <div class="col me-3 d-flex" id="main">
-        <router-view />
-      </div>
-      <div class="col-3 popular-user mh-100">
-        <PopularUser />
+      <div class="col-3 menu mh-100"></div>
+      <div class="col-md-9 row">
+        <TeacherCard
+          v-for="teacher in teachers"
+          :key="teacher.id"
+          :initialTeacher="teacher"
+        />
       </div>
     </div>
+  </div>
+</template> -->
+
+<template>
+  <div class="container py-5">
+    <SpinnerTool v-if="isLoading" />
+    <template v-else>
+      <div class="col-md-9 row">
+        <TeacherCard
+          v-for="teacher in teachers"
+          :key="teacher.id"
+          :initialTeacher="teacher"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
-import teacherAPI from "./../apis/teacher"
-import Menu from "../components/MenuPage.vue"
-// import TeacherCard from "../components/TeacherCard.vue"
-import { Toast } from "./../utils/helpers"
+import teacherAPI from "../apis/teacher"
+import TeacherCard from "../components/TeacherCard.vue"
+import { Toast } from "../utils/helpers"
+import SpinnerTool from "./../components/SpinnerTool"
 
 export default {
-  name: "MainPage",
+  name: "TeachersIntro",
   components: {
-    Menu,
-    // TeacherCard,
+    TeacherCard,
+    SpinnerTool,
   },
   data() {
     return {
@@ -74,14 +88,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-#main {
-  padding-left: 0;
-  padding-right: 0;
-  border-left: 1px solid #e6ecf0;
-  border-right: 1px solid #e6ecf0;
-  max-width: 600px;
-  overflow: auto;
-}
-</style>
